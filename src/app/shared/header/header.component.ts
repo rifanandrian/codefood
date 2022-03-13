@@ -58,7 +58,6 @@ export class HeaderComponent implements OnInit {
 
   keyup(event: any) {
     const value = event.target.value;
-    console.log(value);
     if (value.length >= 2) {
       this.httpService.get(`search/recipes?limit&q=${value}`).subscribe(
         res => {
@@ -116,5 +115,4 @@ export class HeaderComponent implements OnInit {
   moveToHome() {
     this.router.navigateByUrl('');
   }
-
 }

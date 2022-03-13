@@ -18,11 +18,11 @@
             <label for="checkbox{{idx}}"></label>
             <div [hidden]="idx+1 === listSteps.length" class="vl " [class]="!item['done'] ? 'vl--disable' : ''"></div>
           </div>
-          <div class="guide-content w-100">
+          <div [attr.data-cy]="item.attr" class="guide-content w-100">
             <div class="subheader-text " [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">Step {{item['stepOrder']}}</div>
             <div class="desc" [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">{{item['description']}}</div>
             <div *ngIf="!item['done'] && currentIndex === idx" class="btn-indicator-holder">
-              <button  class="btn-indicator" (click)="stepFinish(idx)">Selesai</button>
+              <button data-cy="button-step-done" class="btn-indicator" (click)="stepFinish(idx)">Selesai</button>
             </div>
             <div *ngIf="item['done']" class="btn-indicator-holder" [hidden]="idx+1 === listSteps.length">
               <img class="cheklist-indicator" src="assets/img/green-checklist.png" alt="">

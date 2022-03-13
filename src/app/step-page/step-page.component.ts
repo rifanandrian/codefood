@@ -9,6 +9,7 @@ export interface listStep {
   description: string;
   stepOrder: number;
   done: boolean;
+  attr: string;
 }
 
 export interface APIResponse {
@@ -89,9 +90,10 @@ export class StepPageComponent implements OnInit {
   getStepRecipe(id: number) {
     this.httpService.get(`recipes/${id}/steps`).subscribe(
       res => {
-        this.listSteps = res.data.map((resp: any) => ({
+        this.listSteps = res.data.map((resp: any, idx: any) => ({
           ...resp,
-          done: false
+          done: false,
+          attr: `item-step-${idx}`
         }));
       }
     )
@@ -102,7 +104,10 @@ export class StepPageComponent implements OnInit {
     this.httpService.get(`serve-histories/${idHistory}`, '', this.options).subscribe(
       res => {
         console.log(res);
-        this.listSteps = res.data.steps;
+        this.listSteps = res.data.steps.map((res: any, idx: any) => ({
+          ...res,
+          attr: `item-step-${idx}`
+        }));
         this.currentIndex = res.data.nStepDone
       }
     )

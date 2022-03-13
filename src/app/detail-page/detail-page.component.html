@@ -1,22 +1,6 @@
 <app-header></app-header>
 
 <div class="body-recipe py-content">
-  <div data-cy="form-portion" class="portion">
-    <div data-cy="form-text-title-portion" class="text-portion">Jumlah porsi yang dimasak:</div>
-    <div class="btn-portion-holder">
-      <form action="">
-        <button data-cy="form-button-decrease-portion" class="minus"><img src="assets/img/minus.png" alt="" (click)="countServing('minus')"></button>
-        <div data-cy="form-input-portion">
-          <input data-cy="form-value-portion" type="text" [value]="serving" (keyup)="keyup($event)">
-        </div>
-        <button data-cy="form-button-increase-portion" class="plus"><img src="assets/img/plus.png" alt="" (click)="countServing('plus')"></button>
-      </form>
-    </div>
-    <div class="btn-start-holder">
-      <button data-cy="form-button-submit-portion" class="btn-start" (click)="toStepPage()">Mulai Memasak</button>
-    </div>
-  </div>
-
   <div class="recipe-holder">
     <div class="recipe">
       <div class="btn-holder">
@@ -45,12 +29,28 @@
       <hr/>
       <div class="ingredient-holder">
         <div data-cy="detail-text-ingredients" class="ingredient">Bahan-bahan</div>
-        <div class="list-ingredient" *ngFor="let ingredients of recipe['ingredientsPerServing']" >
-          <div data-cy="detail-text-recipe" class="d-flex">
+        <div data-cy="detail-text-recipe" class="list-ingredient" *ngFor="let ingredients of recipe['ingredientsPerServing']" >
+          <div class="d-flex">
             <span class="bolder">{{ingredients['value'] + ' ' + ingredients['unit']}}</span>&nbsp;{{ingredients['item']}}</div>
         </div>
     
       </div>
+    </div>
+  </div>
+
+  <div data-cy="form-portion" class="portion">
+    <div data-cy="form-text-title-portion" class="text-portion">Jumlah porsi yang dimasak:</div>
+    <div class="btn-portion-holder">
+      <form action="">
+        <button data-cy="form-button-decrease-portion" class="minus"><img src="assets/img/minus.png" alt="" (click)="countServing('minus')"></button>
+        <div data-cy="form-input-portion">
+          <input data-cy="form-value-portion" type="text" [value]="serving" (keyup)="keyup($event)">
+        </div>
+        <button data-cy="form-button-increase-portion" class="plus"><img src="assets/img/plus.png" alt="" (click)="countServing('plus')"></button>
+      </form>
+    </div>
+    <div class="btn-start-holder">
+      <button data-cy="form-button-submit-portion" class="btn-start" (click)="toStepPage()">Mulai Memasak</button>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@
 <div class="body-rate">
   <div class="rate-holder">
     <div class="rate">
-      <ng-container *ngIf="pageRate">
+      <div *ngIf="pageRate">
         <div data-cy="text-title" class="text-header">Yaay! Masakanmu sudah siap disajikan</div>
         <img data-cy="image-rate" class="img-rate" src="assets/img/image-rate.png" alt="">
         <div data-cy="text-description" class="sub-text">Suka dengan resep dari CodeFood? Bagaimana rasanya?</div>
@@ -14,13 +14,13 @@
           </div>
         </div>
         <button data-cy="button-rate" type="button" class="btn-rating" (click)="sendRating()" [disabled]="dsbBtnRating">Berikan Penilaian</button>
-      </ng-container>
+      </div>
 
-      <ng-container *ngIf="!pageRate">
+      <div *ngIf="!pageRate">
         <img data-cy="image-thanks" class="img-thanks" src="assets/img/image-thanks.png" alt="">
         <div data-cy="text-description" class="sub-text text-thanks">Terimakasih telah memberikan penialainmu!</div>
         <button data-cy="button-home" type="button" class="btn-rating btn-thanks" (click)="backToHome()">Kembali Ke Beranda</button>
-      </ng-container>
+      </div>
       
     </div>
   </div>

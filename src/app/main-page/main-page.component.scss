@@ -9,7 +9,7 @@
 
   .filter {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 
     padding: 20px 0;
@@ -78,7 +78,7 @@
   
         .rating {
           display: flex;
-          justify-content: start;
+          justify-content: flex-start;
   
           margin-top: 5px;
   
