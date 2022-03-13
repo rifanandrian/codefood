@@ -9,13 +9,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { SharedModule } from './shared/shared.module';
 import { DetailPageComponent } from './detail-page/detail-page.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { StepPageComponent } from './step-page/step-page.component';
 import { RatePageComponent } from './rate-page/rate-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderService } from './services/header.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,6 @@ import { HeaderService } from './services/header.service';
     LoginPageComponent,
     MainPageComponent,
     DetailPageComponent,
-    HomePageComponent,
     StepPageComponent,
     RatePageComponent,
     HistoryPageComponent
@@ -37,6 +38,9 @@ import { HeaderService } from './services/header.service';
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     HeaderService

@@ -1,4 +1,63 @@
-<app-header></app-header>
+<div class="header-container" [class]="isHistory ? 'header-container-history' : hideNavbar ? 'header-container-detail' : ''">
+  <div [class]="isHistory ? 'py-cotent-history' : 'py-content'">
+    <div *ngIf="isHistory" class="btn-holder">
+      <button class="back-button" (click)="moveToHome()">
+        <img class="arrow" src="assets/img/arrow-right.png" alt="">
+      </button>
+      <div class="text-history">Riwayat</div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div isHistory class="d-flex search-section">
+        <img data-cy=”header-logo” *ngIf="!isHistory" class="logo mr-item" src="assets/img/header-logo.png" alt="" srcset="" (click)="moveToHome()">
+        <form class="mr-item">
+          <input  data-cy=”header-input-search”
+                  type="text"
+                  placeholder="Pick one"
+                  aria-label="Number"
+                  matInput
+                  [formControl]="myControl"
+                  [matAutocomplete]="auto"
+                  (keyup)="keyup($event)">
+          <mat-autocomplete data-cy="search-suggestion-container" #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (click)="setRecipe(option.id)">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </form>
+        <div *ngIf="!!myControl.value && recipeIsSet" class="close-icon-holder">
+          <div data-cy="header-button-clear" class="close-icon"><img src="assets/img/close-icon.png" alt=""></div>
+        </div>
+        <button data-cy="header-button-search" type="submit" (click)="goSearchRecipe()">Cari</button>
+      </div>
+      <button data-cy="header-button-history" *ngIf="!isHistory" class="btn-history" type="button" (click)="moveToHistory()">
+        <img [hidden]="hideNavbar" class="history" src="assets/img/header-button-history.png" alt="" srcset="">
+      </button>
+    </div>
+  
+    <div [hidden]="hideNavbar" class="category">
+      <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item " *ngFor="let item of recipeCategory; let i = index">
+              <a [attr.data-cy]="item.attr" id="nav-index-{{i}}" class="nav-link " [class]="item['selected'] ? 'active' : ''" (click)="selectCategory(item['id'])">{{item['name']}}</a>
+            </li>
+            <!-- <li *ngIf="isHistory" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown link
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item">Selesai Dimasak</a>
+                <a class="dropdown-item">Dalam Progress</a>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
+</div>
 
 <div class="body py-content">
   <div *ngIf="recipes.length > 0" class="filter">
