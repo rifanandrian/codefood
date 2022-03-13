@@ -1,11 +1,10 @@
 @import "/src//styles.scss";
 
 .body-history {
-  padding: 247px 348px 20px 348px;
+  padding: 1px 348px 20px 348px;
   background: #E5E5E5;
-  height: 100%;
-
   overflow: overlay;
+  height: calc(100vh - 14.5rem);
 
   .filter-history {
     display: flex;

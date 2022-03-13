@@ -2,8 +2,11 @@
 
 .body-step {
   background: #E5E5E5;
-  padding-top: 105px;
+  padding-top: 1px;
   padding-bottom: 20px;
+
+  height: calc(100vh - 7rem);
+    overflow: overlay;
   
   .step-holder {
     display: flex;
@@ -13,7 +16,6 @@
     .step {
       margin-top: 20px;
       width: 744px;
-      height: 100%;
       background: $white-color;
       border-radius: 6px;
 
@@ -95,11 +97,27 @@
             input[type="checkbox"]:checked + label:after {
               opacity: 1;
             }
+
+            .vl {
+              border-left: 4px solid $green-color;
+              height: 112%;
+              position: relative;
+              left: 10px;
+              top: 4px;
+              &--disable {
+                border-left: 4px dotted #C4C4C4;
+              }
+            }
+
+            .vl-unset {
+              border: unset;
+            }
   
           }
 
           .guide-content {
             margin-left: 30px;
+
             .subheader-text {
               font-family: PoppinSemiBold;
               font-weight: 600;
@@ -113,6 +131,14 @@
               font-weight: 400;
               font-size: 16px;
               line-height: 180%;
+            }
+
+            .color-black {
+              color: $black-color;  
+            }
+
+            .color-gray{
+              color: $grey-color;
             }
     
             .btn-indicator-holder {
@@ -140,6 +166,13 @@
                 color: $white-color;
                 background: $green-color;
                 border: $green-color;
+                &--finished {
+                  color: $white-color;
+                  width: 288px;
+                  height: 48px;
+                  background: $red-color;
+                  border: transparent;
+                }
               }
             }
           }

@@ -2,13 +2,18 @@
 
 .body-rate {
   background: #E5E5E5;
-  padding-top: 105px;
+  // padding-top: 105px;
   padding-bottom: 20px;
+
+  height: calc(100vh - 7rem);
   
   .rate-holder {
     display: flex;
     justify-content: center;
     background: #E5E5E5;
+
+    height: 100%;
+    overflow: overlay;
 
     .rate {
       display: flex;
@@ -83,6 +88,18 @@
               height: 73.33px;
               margin-bottom: 37px;
             }
+
+            .button-like--active {
+              filter: invert(48%) sepia(79%) saturate(513%) hue-rotate(71deg) brightness(99%) contrast(87%);
+            }
+            
+            .button-neutral--active {
+              filter: invert(45%) sepia(100%) saturate(884%) hue-rotate(23deg) brightness(99%) contrast(100%);
+            }
+
+            .button-dislike--active {
+              filter: invert(42%) sepia(66%) saturate(12343%) hue-rotate(11deg) brightness(97%) contrast(92%);
+            }
           }
 
           
@@ -109,6 +126,11 @@
         color: $white-color;
         background: $red-color;
         border: $red-color;
+      }
+
+      .btn-rating:disabled {
+        background-color: #BDBDBD;
+        border: transparent;
       }
 
       .btn-thanks {

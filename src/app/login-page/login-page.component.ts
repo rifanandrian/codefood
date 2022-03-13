@@ -40,7 +40,7 @@ export class LoginPageComponent implements OnInit {
     });
 
     this.loginForm.valueChanges.subscribe(res => {
-      this.empty = !!res.username && !!res.password && res.password.length > 6 ? false : true;
+      this.empty = !!res.username && !!res.password ? false : true;
     });
 
   }
@@ -52,33 +52,42 @@ export class LoginPageComponent implements OnInit {
   doLogin() {
     this.formSubmitted = true;
 
-    this.httpService.post('auth/login', this.loginForm.value).subscribe(
-      res => {
-        // console.log(res);
-        localStorage.setItem('token', res.data.token)
-        this.moveToHome();
-      },
-      err => {
-        if (this.loginCount >= 3) {
-          if (!this.timerIsStarting) {
-            this.errorText = 'Terlalu banyak percobaan, pastikan data Email dan Password anda benar.';
-            this.startTimer();
-          } else {
-            this.errorText = 'Terlalu banyak percobaan, coba kembali setelah 1 menit.';
-          }
+    // console.log(this.loginForm.controls['password']);
+    if (this.loginForm.invalid) {
+      this.isInvalid = true
 
-        }
+      if (this.loginForm.controls['password']['status'] === 'INVALID') {
+        this.errorText = 'Password Minimal 6 Karakter';
+      } else if (this.loginForm.controls['username']['status'] === 'INVALID') {
+        this.errorText = 'Format Email tidak sesuai';
+      }
+    } else {
 
-        this.errorText = err.error.message;
+      this.httpService.post('auth/login', this.loginForm.value).subscribe(
+        res => {
+          // console.log(res);
+          localStorage.setItem('token', res.data.token)
+          this.moveToHome();
+        },
+        err => {
 
-        // stop the activity
-        if (this.loginForm.invalid) {
+          this.errorText = err.error.message;
           this.isInvalid = true;
           this.loginCount++;
-          return;
+
+          if (this.loginCount >= 3) {
+            if (!this.timerIsStarting) {
+              this.errorText = 'Terlalu banyak percobaan, pastikan data Email dan Password anda benar.';
+              this.startTimer();
+            } else {
+              this.errorText = 'Terlalu banyak percobaan, coba kembali setelah 1 menit.';
+            }
+
+          }
         }
-      }
-    );
+      );
+    }
+
     // console.log(this.loginForm.value);
   }
 

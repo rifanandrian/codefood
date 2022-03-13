@@ -14,7 +14,7 @@ import { RatePageComponent } from './rate-page/rate-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderService } from './services/header.service';
+import { GlobalService } from './services/Global.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -44,7 +44,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     MatInputModule,
   ],
   providers: [
-    HeaderService,
+    GlobalService,
     AuthGuardService,
   ],
   bootstrap: [AppComponent]

@@ -2,8 +2,13 @@
 
 .body-recipe {
   background: #E5E5E5;
-  padding-top: 105px;
+  padding-top: 1px;
   padding-bottom: 20px;
+  height: calc(100vh - 7rem);
+
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   
   .recipe-holder {
     background: #E5E5E5;
@@ -11,8 +16,12 @@
     .recipe {
       margin-top: 40px;
       width: 744px;
-      height: 100%;
+      height: calc(100vh - 12rem);
       background: $white-color;
+
+      overflow: overlay;
+      overflow-y: auto;
+      overflow-x: hidden;
 
       .btn-holder {
         position: relative;
@@ -119,9 +128,8 @@
 }
 
 .portion {
-  position: fixed;
-  left: 57rem;
-  top: 9rem;
+
+  margin-top: 40px;
 
   display: flex;
   flex-direction: column;
@@ -141,39 +149,42 @@
     font-size: 18px;
     line-height: 27px;
   }
-
+  
   .btn-portion-holder {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    button {
-      border-radius: 50%;
-      border: 3px solid transparent;
-
-      img {
-        width: 33.33px;
-        height: 33.33px;
+    form {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      button {
+        border-radius: 50%;
+        border: 3px solid transparent;
+  
+        img {
+          width: 33.33px;
+          height: 33.33px;
+        }
       }
-    }
-
-    input {
-      width: 188px;
-      height: 48px;
-
-      font-family: PoppinSemiBold;
-      font-weight: 600;
-      font-size: 28px;
-      line-height: 42px;
-      text-align: center;
-
-      background: #FFFFFF;
-      border: 1px solid #EAEAEA;
-      border-radius: 6px;
-    }
-
-    .minus, .plus {
-      background: transparent;
+  
+      input {
+        width: 188px;
+        height: 48px;
+  
+        font-family: PoppinSemiBold;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 42px;
+        text-align: center;
+  
+        background: #FFFFFF;
+        border: 1px solid #EAEAEA;
+        border-radius: 6px;
+      }
+  
+      .minus, .plus {
+        background: transparent;
+      }
+  
     }
   }
 

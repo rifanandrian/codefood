@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HeaderService } from '../services/header.service';
+import { GlobalService } from '../services/Global.service';
 import { HttpService } from '../services/http.service';
 
 export interface Recipes {
@@ -38,12 +38,12 @@ export class MainPageComponent implements OnInit {
 
   constructor(private router: Router,
     private httpsService: HttpService,
-    private headerService: HeaderService) { }
+    private GlobalService: GlobalService) { }
 
   ngOnInit() {
     this.checkingFilter('new');
 
-    this.listenFilterRecipe = this.headerService.updateRecipe.subscribe(
+    this.listenFilterRecipe = this.GlobalService.updateRecipe.subscribe(
       idRecipe => {
         // let tempData: never[] = [];
         // for (let idx = 0; idx < this.poolrecipe.length; idx++) {
@@ -78,7 +78,7 @@ export class MainPageComponent implements OnInit {
           attr: `list-item-${idx}`
         }));
         // this.poolrecipe = ths.recipes;
-        console.log(this.recipes);
+        // console.log(this.recipes);
 
       }
     )

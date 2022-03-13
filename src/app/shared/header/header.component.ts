@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, startWith } from 'rxjs';
-import { HeaderService } from 'src/app/services/header.service';
+import { GlobalService } from 'src/app/services/Global.service';
 import { HttpService } from 'src/app/services/http.service';
 
 export interface Options {
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private httpService: HttpService,
-    private headerService: HeaderService) {
+    private GlobalService: GlobalService) {
     this.route.params.subscribe(res => {
       this.hideNavbar = !!res['id'] ? true : false;
     })
@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit {
     for (let idx = 0; idx < this.recipeCategory.length; idx++) {
       if (this.recipeCategory[idx]['id'] === id) {
         this.recipeCategory[idx]['selected'] = true;
-        this.headerService.updateMainRecipe(this.recipeCategory[idx]['id']);
+        this.GlobalService.updateMainRecipe(this.recipeCategory[idx]['id']);
       } else {
         this.recipeCategory[idx]['selected'] = false;
       }
@@ -104,9 +104,9 @@ export class HeaderComponent implements OnInit {
     this.recipeIsId = val
   }
 
-  goSearchRecipe() {
-    console.log(this.recipeIsSet, this.recipeIsId);
-    this.router.navigateByUrl(`${this.recipeIsId}`)
+  goSearchRecipe(id?: number) {
+    // console.log(this.recipeIsSet, this.recipeIsId);
+    this.router.navigateByUrl(`${!!id ? id : this.recipeIsId}`)
   }
 
   moveToHistory() {

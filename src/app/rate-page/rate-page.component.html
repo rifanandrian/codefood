@@ -1,33 +1,25 @@
 <app-header></app-header>
 
-<div class="body-rate py-content">
+<div class="body-rate">
   <div class="rate-holder">
     <div class="rate">
       <ng-container *ngIf="pageRate">
-        <div class="text-header">Yaay! Masakanmu sudah siap disajikan</div>
-        <img class="img-rate" src="assets/img/image-rate.png" alt="">
-        <div class="sub-text">Suka dengan resep dari CodeFood? Bagaimana rasanya?</div>
-        <div class="star-order">
-          <div class="star-section">
-            <button type="button"><img class="img-star" src="assets/img/puas.png" alt=""></button>
-            <div class="text-section">Yummy!</div>
-          </div>
-          <div class="star-section">
-            <button type="button"><img class="img-star" src="assets/img/stdr.png" alt=""></button>
-            <div class="text-section">Lumayan</div>
-          </div>
-          <div class="star-section">
-            <button type="button"><img class="img-star" src="assets/img/tdk-puas.png" alt=""></button>
-            <div class="text-section">Kurang Suka</div>
+        <div data-cy="text-title" class="text-header">Yaay! Masakanmu sudah siap disajikan</div>
+        <img data-cy="image-rate" class="img-rate" src="assets/img/image-rate.png" alt="">
+        <div data-cy="text-description" class="sub-text">Suka dengan resep dari CodeFood? Bagaimana rasanya?</div>
+        <div class="star-order" >
+          <div class="star-section" *ngFor="let rate of rates; let idx = index">
+            <button [attr.data-cy]="rate['attr']" type="button" (click)="setRate(idx)"><img class="img-star" [class]="rate['selected'] ? ' '+rate['attr']+'--active' : ''" [src]="rate['image']" alt=""></button>
+            <div class="text-section">{{rate['text']}}</div>
           </div>
         </div>
-        <button type="button" class="btn-rating" (click)="pageRate = !pageRate">Berikan Penilaian</button>
+        <button data-cy="button-rate" type="button" class="btn-rating" (click)="sendRating()" [disabled]="dsbBtnRating">Berikan Penilaian</button>
       </ng-container>
 
       <ng-container *ngIf="!pageRate">
-        <img class="img-thanks" src="assets/img/image-thanks.png" alt="">
-        <div class="sub-text text-thanks">Terimakasih telah memberikan penialainmu!</div>
-        <button type="button" class="btn-rating btn-thanks" (click)="backToHome()">Kembali Ke Beranda</button>
+        <img data-cy="image-thanks" class="img-thanks" src="assets/img/image-thanks.png" alt="">
+        <div data-cy="text-description" class="sub-text text-thanks">Terimakasih telah memberikan penialainmu!</div>
+        <button data-cy="button-home" type="button" class="btn-rating btn-thanks" (click)="backToHome()">Kembali Ke Beranda</button>
       </ng-container>
       
     </div>

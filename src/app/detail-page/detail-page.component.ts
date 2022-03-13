@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalService } from '../services/Global.service';
 import { HttpService } from '../services/http.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class DetailPageComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private globalService: GlobalService,
     private httpService: HttpService) { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class DetailPageComponent implements OnInit {
     this.httpService.get(`recipes/${params}?serving=${this.serving}`).subscribe(
       res => {
         this.recipe = res.data;
-        this.serving = res.data.nServing;
+        this.serving = !!localStorage.getItem(JSON.parse('serving')) ? localStorage.getItem(JSON.parse('serving')) : res.data.nServing;
       }
     )
 
@@ -43,11 +45,17 @@ export class DetailPageComponent implements OnInit {
     }
   }
 
+  keyup(value: any) {
+    return this.serving = value.target.value;
+  }
+
   backtoHome() {
+    localStorage.removeItem('serving');
     this.router.navigateByUrl('');
   }
 
   toStepPage() {
-    this.router.navigateByUrl(`/${this.recipe.id}/step`);
+    localStorage.setItem('serving', JSON.stringify(this.serving));
+    this.router.navigateByUrl(`/${this.recipe.id}/step` + '?' + `serving=${this.serving}`);
   }
 }

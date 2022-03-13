@@ -8,9 +8,11 @@
     </div>
     <div class="d-flex justify-content-between">
       <div isHistory class="d-flex search-section">
-        <img data-cy="header-logo" *ngIf="!isHistory" class="logo mr-item" src="assets/img/header-logo.png" alt="" srcset="" (click)="moveToHome()">
-        <form class="mr-item">
-          <input  data-cy="header-input-search"
+        <div class="">
+          <img data-cy="header-logo" *ngIf="!isHistory" class="logo mr-item" src="assets/img/header-logo.png" alt="" srcset="" (click)="moveToHome()">
+        </div>
+        <!-- <form data-cy="header-input-search" class="mr-item">
+          <input
                   type="text"
                   placeholder="Pick one"
                   aria-label="Number"
@@ -19,15 +21,27 @@
                   [matAutocomplete]="auto"
                   (keyup)="keyup($event)">
           <mat-autocomplete data-cy="search-suggestion-container" #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (click)="setRecipe(option.id)">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (click)="setRecipe(option.id); goSearchRecipe(option.id)">
               {{option.name}}
             </mat-option>
           </mat-autocomplete>
-        </form>
-        <div *ngIf="!!myControl.value && recipeIsSet" class="close-icon-holder">
-          <div data-cy="header-button-clear" class="close-icon"><img src="assets/img/close-icon.png" alt=""></div>
+        </form> -->
+        <div class="">
+          <form class="mr-item" action="">
+            <input
+  
+              data-cy="header-input-search"
+              type="text"
+              placeholder="Cari Resep">
+          </form>
+          
+          <div *ngIf="!!myControl.value && recipeIsSet" class="close-icon-holder">
+            <div data-cy="header-button-clear" class="close-icon"><img src="assets/img/close-icon.png" alt=""></div>
+          </div>
         </div>
-        <button data-cy="header-button-search" type="submit" (click)="goSearchRecipe()">Cari</button>
+        <div class="">
+          <button data-cy="header-button-search" type="submit" (click)="goSearchRecipe()">Cari</button>
+        </div>
       </div>
       <button data-cy="header-button-history" *ngIf="!isHistory" class="btn-history" type="button" (click)="moveToHistory()">
         <img [hidden]="hideNavbar" class="history" src="assets/img/header-button-history.png" alt="" srcset="">

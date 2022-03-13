@@ -36,8 +36,9 @@ export class HttpService {
     return requestOptions;
   }
 
-  get(serviceUrl: string, query?: any, options?: RequestOptions): Observable<any> {
-    const requestOptions: RequestOptions = this.prepareRequest(query, options);
+  get(serviceUrl: string, query?: any, options?: any): Observable<any> {
+    const requestOptions = options;
+
     let url = `${this.BASE_URL}/${serviceUrl}`;
     return this.http.get<any>(url, requestOptions)
       .pipe(
@@ -46,10 +47,20 @@ export class HttpService {
       );
   }
 
-  post(serviceUrl: string, payload: any, options?: RequestOptions): Observable<any> {
-    const requestOptions: RequestOptions = this.prepareRequest(undefined, options);
+  post(serviceUrl: string, payload: any, options?: any): Observable<any> {
+    const requestOptions = options;
     let url = `${this.BASE_URL}/${serviceUrl}`;
     return this.http.post<any>(url, payload, requestOptions)
+      .pipe(
+        map(response => response),
+        catchError(this.handleErrorResponse),
+      );
+  }
+
+  put(serviceUrl: string, payload: any, options?: any): Observable<any> {
+    const requestOptions = options;
+    let url = `${this.BASE_URL}/${serviceUrl}`;
+    return this.http.put<any>(url, payload, requestOptions)
       .pipe(
         map(response => response),
         catchError(this.handleErrorResponse),

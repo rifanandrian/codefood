@@ -1,6 +1,7 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { RequestOptions } from '../models/request-options.model';
 import { HttpService } from '../services/http.service';
 
@@ -11,7 +12,10 @@ import { HttpService } from '../services/http.service';
 })
 export class HistoryPageComponent implements OnInit {
 
+  private baseUrl = environment.baseUrl;
+
   constructor(private router: Router,
+    private http: HttpClient,
     private httpService: HttpService) {
     this.getHistory();
   }
@@ -20,20 +24,26 @@ export class HistoryPageComponent implements OnInit {
   }
 
   getHistory() {
-    let token: any;
-    if (!!localStorage.getItem('token')) {
-      token = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      });
-    }
-    this.httpService.get('serve-histories', '', token).subscribe(
+    const requestOptions: RequestOptions = new RequestOptions();
+    const token = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+
+    requestOptions.headers = token;
+    console.log(requestOptions);
+    this.httpService.get('serve-histories', '', options).subscribe(
       res => {
         console.log(res);
-      },
-      err => {
-        if (err.status === 401) {
-          this.router.navigateByUrl('login');
-        }
       }
     )
   }

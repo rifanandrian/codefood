@@ -11,20 +11,27 @@
         <div class="header-text">Langkah Memasak</div>
       </div>
 
-      <div class="step-guide-holder" *ngFor="let item of listSteps">
+      <div class="step-guide-holder" *ngFor="let item of listSteps; let idx = index">
         <div class="step-guide">
           <div class="checklist-holder">
-            <input class="checkbox" type="checkbox" name="" id="checkbox1" checked>
-            <label for="checkbox1"></label>
+            <input class="checkbox" type="checkbox" name="" id="checkbox{{idx}}" [checked]="item['done']" disabled>
+            <label for="checkbox{{idx}}"></label>
+            <div [hidden]="idx+1 === listSteps.length" class="vl " [class]="!item['done'] ? 'vl--disable' : ''"></div>
           </div>
           <div class="guide-content w-100">
-            <div class="subheader-text">Step {{item['stepOrder']}}</div>
-            <div class="desc">{{item['description']}}</div>
-            <div class="btn-indicator-holder">
+            <div class="subheader-text " [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">Step {{item['stepOrder']}}</div>
+            <div class="desc" [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">{{item['description']}}</div>
+            <div *ngIf="!item['done'] && currentIndex === idx" class="btn-indicator-holder">
+              <button  class="btn-indicator" (click)="stepFinish(idx)">Selesai</button>
+            </div>
+            <div *ngIf="item['done']" class="btn-indicator-holder" [hidden]="idx+1 === listSteps.length">
               <img class="cheklist-indicator" src="assets/img/green-checklist.png" alt="">
               <div class="text-indicator">Selesai</div>
             </div>
-            <hr/>
+            <div *ngIf="fullyFinished && idx+1 === listSteps.length" class="btn-indicator-holder">
+              <button class="btn-indicator--finished" (click)="finishAll()">Sajikan Makanan</button>
+            </div>
+            <hr [hidden]="idx+1 === listSteps.length"/>
           </div>
         </div>
 

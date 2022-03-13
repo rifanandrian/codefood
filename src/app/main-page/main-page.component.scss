@@ -1,9 +1,9 @@
 @import "/src//styles.scss";
 
 .body {
-  padding-top: 177px;
+  // padding-top: 177px;
   background: #E5E5E5;
-  height: 100%;
+  height: calc(100vh - 11.5rem);
 
   overflow: overlay;
 

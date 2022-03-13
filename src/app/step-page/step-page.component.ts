@@ -1,6 +1,21 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { GlobalService } from '../services/Global.service';
 import { HttpService } from '../services/http.service';
+
+export interface listStep {
+  description: string;
+  stepOrder: number;
+  done: boolean;
+}
+
+export interface APIResponse {
+  success: boolean,
+  message: string,
+  data: {}
+}
 
 @Component({
   selector: 'app-step-page',
@@ -9,13 +24,23 @@ import { HttpService } from '../services/http.service';
 })
 export class StepPageComponent implements OnInit {
 
+  private baseUrl = environment.baseUrl;
+
   public idRecipe = 0;
-  public listSteps = []
+  public listSteps: listStep[] = []
+  public currentIndex = 0;
+  public fullyFinished = false;
+
+  public qtyServing: any;
+
+  public idServeHistory: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpService: HttpService) { }
+    private http: HttpClient,
+    private httpService: HttpService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -25,6 +50,7 @@ export class StepPageComponent implements OnInit {
         this.getStepRecipe(this.idRecipe)
       }
     )
+    this.qtyServing = JSON.parse(localStorage.getItem('serving')!);
   }
 
   backToIngridient() {
@@ -34,10 +60,66 @@ export class StepPageComponent implements OnInit {
   getStepRecipe(id: number) {
     this.httpService.get(`recipes/${id}/steps`).subscribe(
       res => {
-        console.log(res);
-        this.listSteps = res.data;
+        this.listSteps = res.data.map((resp: any) => ({
+          ...resp,
+          done: false
+        }));
       }
     )
+  }
+
+  stepFinish(idxStep: number) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+
+    if (idxStep === 0) {
+      const body = {
+        'nServing': parseInt(this.qtyServing),
+        'recipeId': this.idRecipe
+      }
+      console.log(body);
+
+
+      this.httpService.post('serve-histories', body, options).subscribe(
+        res => {
+          this.idServeHistory = res.data.id;
+        }
+      )
+    }
+
+    for (let idx = 0; idx < this.listSteps.length; idx++) {
+      if (idx === idxStep) {
+        this.currentIndex = idxStep + 1;
+        this.listSteps[idx]['done'] = true;
+        if (this.listSteps[idx]['stepOrder'] !== 1) {
+          const body = {
+            'stepOrder': this.listSteps[idx]['stepOrder'],
+          }
+
+          this.httpService.put(`serve-histories/${this.idServeHistory}/done-step`, body, options).subscribe(
+            res => {
+              console.log(res.data);
+            },
+            err => {
+              this.router.navigateByUrl('login');
+            }
+          );
+
+        }
+      }
+    }
+    this.fullyFinished = this.listSteps.every(v => v.done === true);
+  }
+
+  finishAll() {
+    localStorage.removeItem('serving');
+    this.router.navigateByUrl(`${this.idServeHistory}/rate`);
   }
 
 }
