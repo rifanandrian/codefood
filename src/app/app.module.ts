@@ -18,6 +18,7 @@ import { HeaderService } from './services/header.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
   ],
   providers: [
-    HeaderService
+    HeaderService,
+    AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

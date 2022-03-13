@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, startWith } from 'rxjs';
+import { Router } from '@angular/router';
 import { HeaderService } from '../services/header.service';
 import { HttpService } from '../services/http.service';
 
@@ -17,11 +15,6 @@ export interface Recipes {
   recipeCategory: { id: number; name: string; createdAt: string; updatedAt: string }
   recipeCategoryId: number;
   updatedAt: string;
-}
-
-export interface Options {
-  id: number;
-  name: string;
 }
 
 @Component({
@@ -43,34 +36,9 @@ export class MainPageComponent implements OnInit {
     { key: 'most_like', name: 'Terbaru', selected: false },
   ]
 
-
-
-  // HEader
-  public hideNavbar = false;
-  public isHistory = false;
-  public recipeIsSet = false;
-  public recipeIsId = 0;
-  public recipeCategory = [{ 'id': 99, 'name': 'Semua', 'selected': true, 'attr': '' }];
-  public selectedCategory = 0;
-
-  public myControl = new FormControl();
-  public options: Options[] = [];
-  public filteredOptions: Observable<Options[]> | undefined;
-
   constructor(private router: Router,
-    private route: ActivatedRoute,
     private httpsService: HttpService,
-    private headerService: HeaderService) {
-
-
-    // Header
-    this.route.params.subscribe(res => {
-      this.hideNavbar = !!res['id'] ? true : false;
-    })
-    console.log(this.router.url);
-
-    this.isHistory = this.router.url === '/history' ? true : false;
-  }
+    private headerService: HeaderService) { }
 
   ngOnInit() {
     this.checkingFilter('new');
@@ -99,17 +67,6 @@ export class MainPageComponent implements OnInit {
       }
 
     )
-
-
-
-    // header
-    this.getRecipeCategory();
-
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => (typeof value === 'string' ? value : value.name)),
-      map(name => (name ? this._filter(name) : this.options.slice())),
-    );
   }
 
   getItems(sort?: string, categoryId?: string) {
@@ -151,77 +108,6 @@ export class MainPageComponent implements OnInit {
 
     }
 
-  }
-
-  // Heasder
-
-
-
-  private _filter(value: string): Options[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-  }
-
-  keyup(event: any) {
-    const value = event.target.value;
-    console.log(value);
-    if (value.length >= 2) {
-      this.httpsService.get(`search/recipes?limit&q=${value}`).subscribe(
-        res => {
-          this.options = res.data;
-        }
-      )
-    } else {
-      this.options = [];
-    }
-  }
-
-  getRecipeCategory() {
-    this.httpsService.get(`recipe-categories`).subscribe(
-      res => {
-        const responseData = res['data'].map((category: any) => ({
-          ...category,
-          selected: false
-        }));
-        const tempArr = [...this.recipeCategory, ...responseData]
-        this.recipeCategory = tempArr.map((res, idx) => ({
-          ...res,
-          attr: `category-button-${idx}`
-        }))
-      }
-    )
-  }
-
-  selectCategory(id: number) {
-    this.selectedCategory = id;
-    for (let idx = 0; idx < this.recipeCategory.length; idx++) {
-      if (this.recipeCategory[idx]['id'] === id) {
-        this.recipeCategory[idx]['selected'] = true;
-        this.headerService.updateMainRecipe(this.recipeCategory[idx]['id']);
-      } else {
-        this.recipeCategory[idx]['selected'] = false;
-      }
-
-    }
-  }
-
-  setRecipe(val: number) {
-    this.recipeIsSet = true;
-    this.recipeIsId = val
-  }
-
-  goSearchRecipe() {
-    console.log(this.recipeIsSet, this.recipeIsId);
-    this.router.navigateByUrl(`${this.recipeIsId}`)
-  }
-
-  moveToHistory() {
-    this.router.navigateByUrl('history');
-  }
-
-  moveToHome() {
-    this.router.navigateByUrl('');
   }
 
 }

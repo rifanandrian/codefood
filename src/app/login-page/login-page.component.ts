@@ -25,7 +25,8 @@ export class LoginPageComponent implements OnInit {
 
   public errorText = '';
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private httpService: HttpService) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [
@@ -53,13 +54,14 @@ export class LoginPageComponent implements OnInit {
 
     this.httpService.post('auth/login', this.loginForm.value).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
+        localStorage.setItem('token', res.data.token)
         this.moveToHome();
       },
       err => {
         if (this.loginCount >= 3) {
           if (!this.timerIsStarting) {
-            window.alert('Terlalu banyak percobaan, pastikan data Email dan Password anda benar.');
+            this.errorText = 'Terlalu banyak percobaan, pastikan data Email dan Password anda benar.';
             this.startTimer();
           } else {
             this.errorText = 'Terlalu banyak percobaan, coba kembali setelah 1 menit.';

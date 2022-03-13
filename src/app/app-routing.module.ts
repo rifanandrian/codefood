@@ -5,6 +5,7 @@ import { HistoryPageComponent } from './history-page/history-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { RatePageComponent } from './rate-page/rate-page.component';
+import { AuthGuardService } from './services/auth-guard.service';
 import { StepPageComponent } from './step-page/step-page.component';
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'history',
-    component: HistoryPageComponent
+    component: HistoryPageComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: ':id',
