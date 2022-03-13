@@ -95,17 +95,15 @@ export class MainPageComponent implements OnInit {
       } else {
         this.filterUrutkan[idx]['selected'] = false;
       }
-
-      if (key === 'new') {
-        this.getItems('', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
-      } else if (key === 'asc') {
-        this.getItems('?sort=name_asc', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
-      } else if (key === 'dsc') {
-        this.getItems('?sort=name_desc', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
-      } else if (key === 'most_like') {
-        this.getItems('?sort=like_desc', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
-      }
-
+    }
+    if (key === 'new') {
+      this.getItems('', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
+    } else if (key === 'asc') {
+      this.getItems('?sort=name_asc', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
+    } else if (key === 'dsc') {
+      this.getItems('?sort=name_desc', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
+    } else if (key === 'most_like') {
+      this.getItems('?sort=like_desc', this.idRecipe === 99 ? '' : '?categoryId=' + this.idRecipe);
     }
 
   }

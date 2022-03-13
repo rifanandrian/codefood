@@ -9,8 +9,10 @@ import { HttpService } from '../services/http.service';
   styleUrls: ['./detail-page.component.scss']
 })
 export class DetailPageComponent implements OnInit {
-  public serving = 1;
+  public serving: any = 1;
   public recipe: any;
+
+  public isFromHistory = false;
 
   constructor(
     private router: Router,
@@ -24,6 +26,17 @@ export class DetailPageComponent implements OnInit {
         this.getDetail(parseInt(res['id']))
       }
     )
+
+    this.route.queryParamMap.subscribe(
+      params => {
+        const data = params.get('f');
+        if (data === 'history') {
+          this.isFromHistory = true;
+        }
+      }
+    );
+
+    this.serving = !!JSON.parse(localStorage.getItem('serving')!) ? parseInt(JSON.parse(localStorage.getItem('serving')!)) : 1;
   }
 
   getDetail(params: number) {
@@ -51,7 +64,11 @@ export class DetailPageComponent implements OnInit {
 
   backtoHome() {
     localStorage.removeItem('serving');
-    this.router.navigateByUrl('');
+    if (this.isFromHistory) {
+      this.router.navigateByUrl('/history');
+    } else {
+      this.router.navigateByUrl('');
+    }
   }
 
   toStepPage() {

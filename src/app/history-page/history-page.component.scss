@@ -13,7 +13,7 @@
 
     padding: 20px 0;
 
-    .btn-primary {
+    .button-primary {
       height: 46px;
       
       font-family: PoppinRegular;
@@ -27,7 +27,11 @@
 
       color: $white-color;
       background: $red-color;
+      border: transparent;
+      border-radius: 6px;
+
       &--unactive {
+        border: transparent;
         color: $grey-color;
         background: $white-color;
       }
@@ -115,13 +119,30 @@
           }
   
           .text-rating {
-            font-family: PoppinMedium;
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 500;
-            color: $gray2-color;
-            &--puas {
-              color: $green-color;
+
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 10px;
+            }
+
+            .button-rating {
+              font-family: PoppinMedium;
+              font-size: 16px;
+              line-height: 24px;
+              font-weight: 500;
+              color: $gray2-color;
+              background: transparent;
+              border: transparent;
+              &--puas {
+                color: $green-color;
+              }
+              &--netral {
+                color: $orange-color;
+              }
+              &--dislike {
+                color: $red-color;
+              }
             }
           }
   
@@ -132,6 +153,8 @@
             line-height: 24px;
             font-weight: 500;
             color: $red-color;
+
+            cursor: pointer;
   
             &--unfinished {
               color: $orange-color;

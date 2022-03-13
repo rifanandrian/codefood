@@ -34,6 +34,16 @@ export class StepPageComponent implements OnInit {
   public qtyServing: any;
 
   public idServeHistory: any;
+  public isFromHistory = false;
+
+  public options = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    })
+  };
 
   constructor(
     private router: Router,
@@ -43,18 +53,37 @@ export class StepPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(
-      res => {
-        console.log(res);
-        this.idRecipe = parseInt(res['id']);
-        this.getStepRecipe(this.idRecipe)
-      }
-    )
+
     this.qtyServing = JSON.parse(localStorage.getItem('serving')!);
+
+    this.route.queryParamMap.subscribe(
+      params => {
+        console.log(params);
+
+        const data = params.get('idHistory');
+        if (!!data) {
+          this.isFromHistory = true;
+          this.getStepRecipeFromHistory(data);
+        } else {
+          // do nothing
+          this.route.params.subscribe(
+            res => {
+              console.log(res);
+              this.idRecipe = parseInt(res['id']);
+              this.getStepRecipe(this.idRecipe)
+            }
+          )
+        }
+      }
+    );
   }
 
   backToIngridient() {
-    this.router.navigateByUrl(`/${this.idRecipe}`);
+    if (this.isFromHistory) {
+      this.router.navigateByUrl(`/history`);
+    } else {
+      this.router.navigateByUrl(`/${this.idRecipe}`);
+    }
   }
 
   getStepRecipe(id: number) {
@@ -68,25 +97,25 @@ export class StepPageComponent implements OnInit {
     )
   }
 
-  stepFinish(idxStep: number) {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+  getStepRecipeFromHistory(idHistory: string) {
 
+    this.httpService.get(`serve-histories/${idHistory}`, '', this.options).subscribe(
+      res => {
+        console.log(res);
+        this.listSteps = res.data.steps;
+        this.currentIndex = res.data.nStepDone
+      }
+    )
+  }
+
+  stepFinish(idxStep: number) {
     if (idxStep === 0) {
       const body = {
         'nServing': parseInt(this.qtyServing),
         'recipeId': this.idRecipe
       }
-      console.log(body);
 
-
-      this.httpService.post('serve-histories', body, options).subscribe(
+      this.httpService.post('serve-histories', body, this.options).subscribe(
         res => {
           this.idServeHistory = res.data.id;
         }
@@ -102,7 +131,7 @@ export class StepPageComponent implements OnInit {
             'stepOrder': this.listSteps[idx]['stepOrder'],
           }
 
-          this.httpService.put(`serve-histories/${this.idServeHistory}/done-step`, body, options).subscribe(
+          this.httpService.put(`serve-histories/${this.idServeHistory}/done-step`, body, this.options).subscribe(
             res => {
               console.log(res.data);
             },

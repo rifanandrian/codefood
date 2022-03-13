@@ -5,96 +5,56 @@
     <div class="text mr-item">
       Urutkan:
     </div>
-    <div class="mr-item">
-      <input type="checkbox" class="btn-check" id="btn-check-1" autocomplete="off">
-      <label class="btn btn-primary" for="btn-check-1">Terbaru</label>
+    <div data-cy="button-sort-newest" class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-1" autocomplete="off"  (click)="checkingFilter('newest')">
+      <label class="button-primary" [class]="!filterUrutkan[0]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-1">Terbaru</label>
     </div>
-    <div class="mr-item">
-      <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off">
-      <label class="btn btn-primary btn-primary--unactive" for="btn-check-2">Terlama</label>
+    <div data-cy="button-sort-oldest" class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off"  (click)="checkingFilter('oldest')">
+      <label class="button-primary" [class]="!filterUrutkan[1]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-2">Terlama</label>
     </div>
-    <div class="mr-item">
-      <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off">
-      <label class="btn btn-primary btn-primary--unactive" for="btn-check-3">Porsi Terbanyak</label>
+    <div data-cy="button-sort-oldest" class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off"  (click)="checkingFilter('nserve_desc')">
+      <label class="button-primary" [class]="!filterUrutkan[2]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-3">Porsi Terbanyak</label>
     </div>
-    <div class="mr-item">
-      <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off">
-      <label class="btn btn-primary btn-primary--unactive" for="btn-check-4">Porsi Tersedikit</label>
+    <div data-cy="button-sort-least" class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off"  (click)="checkingFilter('nserve_asc')">
+      <label class="button-primary" [class]="!filterUrutkan[3]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-4">Porsi Tersedikit</label>
     </div>
   </div>
 
-  <div class="list-items-history">
-    <div class="list-items-holder">
+  <div class="list-items-history" 
+    infinite-scroll 
+    (scrolled)="onScrollDown($event)" 
+    (scrolledUp)="onScrollUp($event)">
+    <div data-cy="history-item-0" class="list-items-holder" *ngFor="let itemList of listHistory;let i = index">
       <div class="item-history">
-        <div class="date-history">3 Feb 2022</div>
+        <div data-cy="history-item-text-date" class="date-history">{{itemList['createdAt'] | date:'dd MMM YYYY'}}</div>
         <div class="history-information">
           <div class="img-text-holder">
-            <img src="assets/img/list-item-image.png" alt="">
+            <img data-cy="history-item-image" [src]="itemList['recipeImage']" alt="">
             <div class="item-text">
-              <div class="text-header">Kue Brownies</div>
-              <div class="text-body">CF35</div>
-              <div class="text-body">Kue</div>
+              <div data-cy="history-item-text-title" class="text-header">{{itemList['recipeName']}}</div>
+              <div data-cy="history-item-text-code" class="text-body">{{itemList['id']}}</div>
+              <div data-cy="history-item-text-category" class="text-body">{{itemList['recipeCategoryName']}}</div>
             </div>
           </div>
   
-          <div class="portion">Porsi: <span class="bolder">5</span></div>
+          <div data-cy="history-item-text-portion" class="portion">Porsi: <span class="bolder">&nbsp;{{itemList['nServing']}}</span></div>
         </div>
       </div>
       <hr/>
       <div class="item-history">
         <div class="history-information">
-          <div class="text-rating">Belum ada penilaian</div>
-          <div class="text-progress">Selesa(100%)</div>
-        </div>
-      </div>
-    </div> 
-
-    <div class="list-items-holder">
-      <div class="item-history">
-        <div class="date-history">3 Feb 2022</div>
-        <div class="history-information">
-          <div class="img-text-holder">
-            <img src="assets/img/list-item-image.png" alt="">
-            <div class="item-text">
-              <div class="text-header">Kue Brownies</div>
-              <div class="text-body">CF35</div>
-              <div class="text-body">Kue</div>
-            </div>
+          <div class="text-rating">
+            <img *ngIf="!!itemList['reaction']" [src]="itemList['icon']" alt="">
+            <button data-cy="history-item-text-rating"
+              class="button-rating " 
+              [class]="itemList['reaction'] === 'like' ? 'button-rating--puas' : itemList['reaction'] === 'neutral' ? 'button-rating--netral' : itemList['reaction'] === 'dislike' ? 'button-rating--dislike' : ''"
+              type="button"
+              (click)="toRatingPage(i)">{{!!itemList['indReaction'] ? itemList['indReaction'] : 'Belum ada penilaian' }}</button>
           </div>
-  
-          <div class="portion">Porsi: <span class="bolder">5</span></div>
-        </div>
-      </div>
-      <hr/>
-      <div class="item-history">
-        <div class="history-information">
-          <div class="text-rating">Belum ada penilaian</div>
-          <div class="text-progress">Selesa(100%)</div>
-        </div>
-      </div>
-    </div> 
-
-    <div class="list-items-holder">
-      <div class="item-history">
-        <div class="date-history">3 Feb 2022</div>
-        <div class="history-information">
-          <div class="img-text-holder">
-            <img src="assets/img/list-item-image.png" alt="">
-            <div class="item-text">
-              <div class="text-header">Kue Brownies</div>
-              <div class="text-body">CF35</div>
-              <div class="text-body">Kue</div>
-            </div>
-          </div>
-  
-          <div class="portion">Porsi: <span class="bolder">5</span></div>
-        </div>
-      </div>
-      <hr/>
-      <div class="item-history">
-        <div class="history-information">
-          <div class="text-rating">Belum ada penilaian</div>
-          <div class="text-progress">Selesa(100%)</div>
+          <div data-cy="history-item-button-status" class="text-progress" (click)="toStepPage(i, itemList['status'])">{{itemList['status'] === 'progress' ? 'Dalam Proses' : 'Selesai'}}({{itemList['percentage']}}%)</div>
         </div>
       </div>
     </div> 

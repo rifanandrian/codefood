@@ -7,19 +7,19 @@
     </div>
     <div  data-cy="button-sort-latest" class="mr-item">
       <input type="checkbox" class="btn-check" id="btn-check-1" autocomplete="off" (click)="checkingFilter('new')">
-      <label class="btn btn-primary " [class]="!filterUrutkan[0]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-1">Terbaru</label>
+      <label class="button-primary " [class]="!filterUrutkan[0]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-1">Terbaru</label>
     </div>
     <div data-cy="button-sort-az" class="mr-item">
       <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off" (click)="checkingFilter('asc')">
-      <label class="btn btn-primary " [class]="!filterUrutkan[1]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-2">Urutkan A-Z</label>
+      <label class="button-primary " [class]="!filterUrutkan[1]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-2">Urutkan A-Z</label>
     </div>
     <div data-cy="button-sort-za" class="mr-item">
       <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" (click)="checkingFilter('dsc')">
-      <label class="btn btn-primary " [class]="!filterUrutkan[2]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-3">Urutkan Z-A</label>
+      <label class="button-primary " [class]="!filterUrutkan[2]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-3">Urutkan Z-A</label>
     </div>
     <div data-cy="button-sort-favorite" class="mr-item">
       <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off" (click)="checkingFilter('most_like')">
-      <label class="btn btn-primary " [class]="!filterUrutkan[3]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-4">Urutkan Dari Paling Disukai</label>
+      <label class="button-primary " [class]="!filterUrutkan[3]['selected'] ? 'button-primary--unactive' : ''" for="btn-check-4">Urutkan Dari Paling Disukai</label>
     </div>
   </div>
 

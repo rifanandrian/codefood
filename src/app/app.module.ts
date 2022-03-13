@@ -19,6 +19,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthGuardService } from './services/auth-guard.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    InfiniteScrollModule
   ],
   providers: [
     GlobalService,
