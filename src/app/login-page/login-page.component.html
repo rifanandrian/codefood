@@ -1,0 +1,30 @@
+<div class="div-container">
+  <div class="head py-content" >
+    <img data-cy=”header-logo” class="header-logo" src="assets/img/header-logo.png" alt="" srcset="">
+  </div>
+  <div class="body py-content d-flex justify-content-between">
+    <img data-cy=”content-logo class="content-logo" src="assets/img/content-logo.png" alt="" srcset="">
+    <form class="login-form" [formGroup]="loginForm">
+      <div data-cy=”form-text-title” class="form-text-login" [class]="isInvalid ? ' form-text-login--invalid' : ''">Login</div>
+      <div data-cy=”form-button-skip” class="form-alert-container" *ngIf="isInvalid">
+        <div class="text-section">{{errorText}}</div>
+        <a (click)="isInvalid = !isInvalid">OK</a>
+      </div>
+      <div class="div-input">
+        <div data-cy=”form-text-email” class="form-text-email" [class]="isInvalid ? ' form-text-email--invalid' : ' '">Email</div>
+        <input data-cy=”form-input-email”  class="form-input-email" [class]="isInvalid ? ' form-input-email--invalid' : ' '" type="email" autocomplete="new-password" formControlName="username" minlength="6" required/>
+        <div *ngIf="formSubmitted && loginForm.errors?.['email']" class="invalid-feedback">
+          <div *ngIf="loginForm.errors?.['email']">First Name is required</div>
+        </div>
+      </div>
+      <div class="div-input " [class]="isInvalid ? ' div-input--invalid' : ' div-input--last'">
+        <div data-cy=”form-text-password” class="form-text-password" [class]="isInvalid ? ' form-text-password--invalid' : ' '">Password</div>
+        <input data-cy=”form-input-password” class="form-input-password" [class]="isInvalid ? ' form-input-password--invalid' : ' '" type="password" autocomplete="new-password" formControlName="password" required/>
+      </div>
+      <button data-cy=”form-button-login” class="form-button-login btn-login" type="button" (click)="doLogin()" [disabled]="empty">Login</button>
+      <div class="link">
+        <a data-cy=”form-button-skip” class="form-button-skip" (click)="moveToHome()">Lewati Login</a>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+@import "/src/styles.scss";
+
+.body-rate {
+  background: #E5E5E5;
+  padding-top: 105px;
+  padding-bottom: 20px;
+  
+  .rate-holder {
+    display: flex;
+    justify-content: center;
+    background: #E5E5E5;
+
+    .rate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      margin-top: 20px;
+      width: 744px;
+      height: 996px;
+      background: $white-color;
+      border-radius: 6px;
+
+      .text-header {
+        margin-top: 70px;
+        font-family: PoppinSemiBold;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 180%;
+      }
+
+      .img-rate {
+        width: 414px;
+        height: 227px;
+
+        margin-top: 60px;
+      }
+
+      .img-thanks {
+        width: 410px;
+        height: 344px;
+
+        margin-top: 96px;
+      }
+
+
+      .sub-text {
+        width: 364px;
+        height: 64px;
+
+        font-family: PoppinMedium;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 180%;
+
+        margin-top: 91px;
+
+        text-align: center;
+      }
+
+      .text-thanks {
+        margin-top: 83px;
+      }
+
+      .star-order {
+        display: flex;
+
+        margin-top: 74.33px;
+
+        .star-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          margin-right: 94.67px;
+
+          button {
+            background: transparent;
+            border-color: transparent;
+
+            .img-star {
+              width: 73.33px;
+              height: 73.33px;
+              margin-bottom: 37px;
+            }
+          }
+
+          
+          .text-section {
+            color: $grey-color;
+            font-family: PoppinMedium;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 180%;
+          }
+        }
+
+        .star-section:nth-child(3) {
+          margin-right: 0;
+        }
+      }
+
+      .btn-rating {
+        width: 320px;
+        height: 48px;
+
+        margin-top: 76px;
+
+        color: $white-color;
+        background: $red-color;
+        border: $red-color;
+      }
+
+      .btn-thanks {
+        margin-top: 225px;
+      }
+    }
+  }
+}

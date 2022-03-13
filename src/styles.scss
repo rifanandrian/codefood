@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+*, *::after, *::before {
+  font-family: PoppinRegular;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+@font-face{
+  font-family: PoppinRegular;
+  src: url('assets/fonts/Poppin/Poppins-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PoppinBold;
+  src: url('assets/fonts/Poppin/Poppins-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PoppinSemiBold;
+  src: url('assets//fonts/Poppin/Poppins-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PoppinMedium;
+  src: url('assets/fonts/Poppin/Poppins-Medium.ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.py-content {
+  padding: 0 156px;
+}
+
+.mr-item {
+  margin-right: 24px;
+}
+
+$red-color: #EF5734;
+
+$orange-color: #F2994A;
+
+$black-color:#3D3D3D;
+
+$white-color: #FFFFFF;
+
+$grey-color: #898989;
+
+$gray2-color: #828282;
+
+$green-color: #2BAF2B;
+
+input {
+  border: 1px solid #EAEAEA;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+button {
+  border-radius: 6px;
+}
+
+input {
+  padding: 11px 15px;
+}
+
+html, body { height: 100%; }
+
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

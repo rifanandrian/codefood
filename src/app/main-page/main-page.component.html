@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="body py-content">
+  <div *ngIf="recipes.length > 0" class="filter">
+    <div class="text mr-item">
+      Urutkan:
+    </div>
+    <div class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-1" autocomplete="off" (click)="checkingFilter('new')">
+      <label data-cy="button-sort-latest" class="btn btn-primary " [class]="!filterUrutkan[0]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-1">Terbaru</label>
+    </div>
+    <div class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-2" autocomplete="off" (click)="checkingFilter('asc')">
+      <label data-cy="button-sort-az" class="btn btn-primary " [class]="!filterUrutkan[1]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-2">Urutkan A-Z</label>
+    </div>
+    <div class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-3" autocomplete="off" (click)="checkingFilter('dsc')">
+      <label data-cy="button-sort-za" class="btn btn-primary " [class]="!filterUrutkan[2]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-3">Urutkan Z-A</label>
+    </div>
+    <div class="mr-item">
+      <input type="checkbox" class="btn-check" id="btn-check-4" autocomplete="off" (click)="checkingFilter('most_like')">
+      <label data-cy="button-sort-favorite" class="btn btn-primary " [class]="!filterUrutkan[3]['selected'] ? 'btn-primary--unactive' : ''" for="btn-check-4">Urutkan Dari Paling Disukai</label>
+    </div>
+  </div>
+
+  <div *ngIf="recipes.length > 0" class="list-items">
+    <div [attr.data-cy]="recipe.attr" id="{{recipe.attr}}" class="item" *ngFor="let recipe of recipes;" (click)="moveToDetail(recipe['id'])">
+      <img [src]="recipe['image']" alt="">
+      <div [attr.data-cy]="recipe.attr" class="item-text">
+        <div class="h-100 d-flex flex-column justify-content-between">
+          <div class="">
+            <div class="text-header">{{recipe['name']}}</div>
+            <div class="text-body">{{recipe['recipeCategory']['name']}}</div>
+
+          </div>
+          <div class="">
+            <div class="rating">
+              <div data-cy="list-item-like" class="oval green">
+                <img src="assets/img/green-rating.png" alt="">
+                <label for="">{{recipe['nReactionLike']}}</label>
+              </div>
+              <div data-cy="list-item-neutral" class="oval yellow">
+                <img src="assets/img/yellow-rating.png" alt="">
+                <label for="">{{recipe['nReactionNeutral']}}</label>
+              </div>
+              <div data-cy="list-item-dislike" class="oval red">
+                <img src="assets/img/red-rating.png" alt="">
+                <label for="">{{recipe['nReactionDislike']}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="recipes.length <= 0" class="list-empty">
+    <img class="list-image-empty" src="assets/img/list-image-empty.png" alt="">
+    <div class="text-empty">Oops! Resep tidak ditemukan.</div>
+  </div>
+
+</div>

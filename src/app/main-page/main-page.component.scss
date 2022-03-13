@@ -1,0 +1,139 @@
+@import "/src//styles.scss";
+
+.body {
+  padding-top: 177px;
+  background: #E5E5E5;
+  height: 100%;
+
+  overflow: overlay;
+
+  .filter {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    padding: 20px 0;
+
+    .btn-primary {
+      height: 46px;
+      
+      font-family: PoppinRegular;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+
+      border: transparent;
+
+      margin: auto;
+      padding: 11px 20px;
+
+      color: $white-color;
+      background: $red-color;
+      &--unactive {
+        color: $grey-color;
+        background: $white-color;
+      }
+    }
+  }
+
+  .list-items {
+    display: grid;
+    gap: 24px 24px;
+    grid-template-columns: 264px 264px 264px 264px;
+
+    .item {
+      width: 264px;
+      height: 333px;
+      border-radius: 6px;
+      background: $white-color;
+
+      cursor: pointer;      
+      
+      img {
+        width: 264px;
+        height: 182px;
+      }
+      
+      .item-text {
+        padding: 20px 15px;
+        height: 45%;
+
+        .text-header {
+          font-family: PoppinSemiBold;
+          font-size: 18px;
+          line-height: 27px;
+          font-weight: 600;
+          color: $black-color;
+          
+          margin: 0 0 4px 0;
+        }
+  
+        .text-body {
+          font-family: PoppinRegular;
+          font-size: 14px;
+          line-height: 21px;
+          font-weight: 400;
+        }
+  
+        .rating {
+          display: flex;
+          justify-content: start;
+  
+          margin-top: 5px;
+  
+          .oval {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            width: 52px;
+            height: 26px;
+            border: 1px solid #EAEAEA;
+            box-sizing: border-box;
+            border-radius: 19px;
+
+            margin-right: 12px;
+  
+            img {
+              width: 16px;
+              height: 16px;
+            }
+  
+            font-family: PoppinRegular;
+            font-size: 12px;
+            line-height: 18px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .list-empty {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .list-image-empty {
+      width: 267px;
+      height: 277px;
+    }
+
+    .text-empty {
+      font-family: PoppinMedium;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 180%;
+      
+      text-align: center;
+
+      margin-top: 50px;
+      
+      color: #898989;
+    }
+  }
+}

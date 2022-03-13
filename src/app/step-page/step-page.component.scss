@@ -1,0 +1,153 @@
+@import "/src/styles.scss";
+
+.body-step {
+  background: #E5E5E5;
+  padding-top: 105px;
+  padding-bottom: 20px;
+  
+  .step-holder {
+    display: flex;
+    justify-content: center;
+    background: #E5E5E5;
+
+    .step {
+      margin-top: 20px;
+      width: 744px;
+      height: 100%;
+      background: $white-color;
+      border-radius: 6px;
+
+      .btn-holder {
+        display: flex;
+        padding-left: 17px;
+        padding-top: 30px;
+        margin-bottom: 37px;
+
+        .back-button {
+          width: 40px;
+          height: 40px;
+          background: $white-color;
+          border: 1px solid #EAEAEA;
+          box-sizing: border-box;
+          border-radius: 6px;
+
+          .arrow {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        .header-text {
+          width: 100%;
+          padding-left: 20px;
+          font-family: PoppinSemiBold;
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 36px;
+        }
+      }
+
+      .step-guide-holder {
+        padding: 20px;
+
+        .step-guide {
+          display: flex;
+
+          .checklist-holder {
+            position: relative;
+
+            label {
+              background-color: $white-color;
+              border: 1px solid #ccc;
+              border-radius: 50%;
+              cursor: pointer;
+              width: 24px;
+              height: 24px;
+              left: 0;
+              position: absolute;
+              top: 0;
+            }
+
+            label:after {
+              border: 2px solid #ccc;
+              border-top: none;
+              border-right: none;
+              content: "";
+              height: 6px;
+              width: 12px;
+              position: absolute;
+              left: 5px;
+              top: 7px;
+              opacity: 0;
+              transform: rotate(-45deg);
+
+            }
+
+            input[type="checkbox"] {
+              visibility: hidden;
+            }
+            
+            input[type="checkbox"]:checked + label {
+              background-color: $green-color;
+              border-color: $green-color;
+            }
+            
+            input[type="checkbox"]:checked + label:after {
+              opacity: 1;
+            }
+  
+          }
+
+          .guide-content {
+            margin-left: 30px;
+            .subheader-text {
+              font-family: PoppinSemiBold;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 27px;
+            }
+    
+            .desc {
+              margin-top: 4px;
+              font-family: PoppinRegular;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 180%;
+            }
+    
+            .btn-indicator-holder {
+              display: flex;
+              align-items: center;
+              margin: 20px 0;
+
+              .cheklist-indicator {
+                width: 12px;
+                height: 8px;
+              }
+
+              .text-indicator {
+                margin-left: 8px;
+                font-family: PoppinSemiBold;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                color: $green-color;
+              }
+    
+              .btn-indicator {
+                width: 288px;
+                height: 48px;
+                color: $white-color;
+                background: $green-color;
+                border: $green-color;
+              }
+            }
+          }
+  
+        }
+      }
+      
+
+    }
+  }
+}

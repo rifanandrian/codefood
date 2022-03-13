@@ -1,0 +1,142 @@
+@import "../../styles.scss";
+
+.head {
+  display: flex;
+  align-items: center;
+  height: 106px;
+  vertical-align: middle;
+
+  .header-logo {
+    width: 192px;
+    height: 49px;
+  }
+}
+
+.body {
+  background-color: $red-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 623px;
+
+  .content-logo {
+    width: 552px;
+    height: 139px;
+  }
+
+  .login-form {
+    background-color: $white-color;
+    width: 360px;
+    height: 563px;
+    padding: 30px 20px;
+    border-radius: 6px;
+
+    .form-text-login {
+      font-family: PoppinSemiBold;
+      font-size: 18px;
+      line-height: 27px;
+      font-weight: 600;
+      color: $black-color;
+
+      margin-bottom: 60px;
+      &--invalid {
+        margin-bottom: 20px;
+      }
+    }
+
+    .form-alert-container {
+      height: 58px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+      background-color: #000000DE;
+
+      margin-bottom: 20px;
+
+      .text-section {
+        margin: auto;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: $white-color;
+      }
+
+      a {
+        margin: auto;
+        color: #BB86FC;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+
+    .div-input {
+      .form-text-email, .form-text-password {
+        
+        font-family: PoppinMedium;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+        color: $black-color;
+
+        &--invalid {
+          color: $red-color;
+        }
+      }
+
+      margin-bottom: 20px;
+
+      .form-input-email, .form-input-password {
+        width: 320px;
+        height: 48px;
+
+        font-family: PoppinRegular;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 10px;
+        font-weight: 400;
+
+        &--invalid {
+          border-color: $red-color;
+        }
+      }
+
+      &--last {
+        margin-bottom: 80px;
+      }
+      &--invalid {
+        margin-bottom: 42px;
+      }
+    }
+
+
+    button {
+      margin: auto;
+      width: 320px;
+      height: 48px;
+      color: $white-color;
+      background-color: $red-color;
+      margin-bottom: 80px;
+      border-radius: 6px;
+      border-color: $red-color;
+    }
+
+    button:disabled {
+      background-color: $grey-color;
+      border-color: transparent;
+    }
+
+    .link {
+      display: flex;
+      justify-content: center;
+
+      a {
+        font-family: PoppinSemiBold;
+        text-decoration: none;
+        cursor: pointer;
+        color: $red-color;
+      }
+    }
+  }
+}

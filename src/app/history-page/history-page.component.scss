@@ -1,0 +1,154 @@
+@import "/src//styles.scss";
+
+.body-history {
+  padding: 247px 348px 20px 348px;
+  background: #E5E5E5;
+  height: 100%;
+
+  overflow: overlay;
+
+  .filter-history {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    padding: 20px 0;
+
+    .btn-primary {
+      height: 46px;
+      
+      font-family: PoppinRegular;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+
+
+      margin: auto;
+      padding: 11px 20px;
+
+      color: $white-color;
+      background: $red-color;
+      &--unactive {
+        color: $grey-color;
+        background: $white-color;
+      }
+    }
+  }
+
+  .list-items-history {
+
+    .list-items-holder {
+      width: 744px;
+      height: 257px;
+      background: $white-color;
+      border-radius: 6px;
+
+      margin-bottom: 20px;
+  
+      .item-history {
+        padding: 20px;
+  
+        .date-history {
+          font-family: PoppinRegular;
+          color: $gray2-color;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+        }
+  
+        .history-information {
+          display: flex;
+          justify-content: space-between;
+  
+          .img-text-holder {
+            display: flex;
+  
+            margin-top: 21px;
+            
+            img {
+              width: 111px;
+              height: 111px;
+    
+              border-radius: 6px;
+            }
+    
+            .item-text {
+              padding: 0 20px;
+      
+              .text-header {
+                font-family: PoppinSemiBold;
+                font-size: 18px;
+                line-height: 27px;
+                font-weight: 600;
+                color: $black-color;
+                
+                margin: 0 0 15px 0;
+              }
+        
+              .text-body {
+                font-family: PoppinRegular;
+                font-size: 14px;
+                line-height: 21px;
+                font-weight: 400;
+                color: $grey-color !important;
+  
+                margin: 0 0 15px 0;
+              }
+  
+            }
+          }
+  
+          .portion {
+            display: flex;
+            align-items: flex-end;
+  
+            font-family: PoppinRegular;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+  
+            .bolder {
+              font-family: PoppinSemiBold;
+              font-size: 16px;
+              line-height: 20px;
+              font-weight: 600;
+            }
+          }
+  
+          .text-rating {
+            font-family: PoppinMedium;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+            color: $gray2-color;
+            &--puas {
+              color: $green-color;
+            }
+          }
+  
+  
+          .text-progress {
+            font-family: PoppinMedium;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+            color: $red-color;
+  
+            &--unfinished {
+              color: $orange-color;
+            }
+  
+          }
+  
+        }
+        
+        
+      }
+
+    }
+  }
+}
+
+hr {
+  margin: 0;
+}

@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<div class="body-step py-content">
+  <div class="step-holder">
+    <div class="step">
+
+      <div class="btn-holder">
+        <button class="back-button" (click)="backToIngridient()">
+          <img class="arrow" src="assets/img/arrow-right.png" alt="">
+        </button>
+        <div class="header-text">Langkah Memasak</div>
+      </div>
+
+      <div class="step-guide-holder" *ngFor="let item of listSteps">
+        <div class="step-guide">
+          <div class="checklist-holder">
+            <input class="checkbox" type="checkbox" name="" id="checkbox1" checked>
+            <label for="checkbox1"></label>
+          </div>
+          <div class="guide-content w-100">
+            <div class="subheader-text">Step {{item['stepOrder']}}</div>
+            <div class="desc">{{item['description']}}</div>
+            <div class="btn-indicator-holder">
+              <img class="cheklist-indicator" src="assets/img/green-checklist.png" alt="">
+              <div class="text-indicator">Selesai</div>
+            </div>
+            <hr/>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

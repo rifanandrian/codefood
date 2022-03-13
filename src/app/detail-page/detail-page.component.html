@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+<div class="body-recipe py-content">
+  <div class="portion">
+    <div class="text-portion">Jumlah porsi yang dimasak:</div>
+    <div class="btn-portion-holder">
+      <button class="minus"><img src="assets/img/minus.png" alt="" (click)="countServing('minus')"></button>
+      <input type="text" [value]="serving">
+      <button class="plus"><img src="assets/img/plus.png" alt="" (click)="countServing('plus')"></button>
+    </div>
+    <div class="btn-start-holder">
+      <button class="btn-start" (click)="toStepPage()">Mulai Memasak</button>
+    </div>
+  </div>
+
+  <div class="recipe-holder">
+    <div class="recipe">
+      <div class="btn-holder">
+        <button class="back-button" (click)="backtoHome()">
+          <img class="arrow" src="assets/img/arrow-right.png" alt="">
+        </button>
+      </div>
+      <img class="picture" [src]="recipe['image']" alt="">
+      <div class="padding-header">
+        <div class="header">{{recipe['name']}}</div>
+        <div class="rating">
+          <div class="oval green">
+            <img src="assets/img/green-rating.png" alt="">
+            <label for="">{{recipe['nReactionLike']}}</label>
+          </div>
+          <div class="oval yellow">
+            <img src="assets/img/yellow-rating.png" alt="">
+            <label for="">{{recipe['nReactionNeutral']}}</label>
+          </div>
+          <div class="oval red">
+            <img src="assets/img/red-rating.png" alt="">
+            <label for="">{{recipe['nReactionDislike']}}</label>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="ingredient-holder">
+        <div class="ingredient">Bahan-bahan</div>
+        <div class="list-ingredient" *ngFor="let ingredients of recipe['ingredientsPerServing']" >
+          <div class="d-flex">
+            <span class="bolder">{{ingredients['value'] + ' ' + ingredients['unit']}}</span>&nbsp;{{ingredients['item']}}</div>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+</div>

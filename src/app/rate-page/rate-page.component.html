@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<div class="body-rate py-content">
+  <div class="rate-holder">
+    <div class="rate">
+      <ng-container *ngIf="pageRate">
+        <div class="text-header">Yaay! Masakanmu sudah siap disajikan</div>
+        <img class="img-rate" src="assets/img/image-rate.png" alt="">
+        <div class="sub-text">Suka dengan resep dari CodeFood? Bagaimana rasanya?</div>
+        <div class="star-order">
+          <div class="star-section">
+            <button type="button"><img class="img-star" src="assets/img/puas.png" alt=""></button>
+            <div class="text-section">Yummy!</div>
+          </div>
+          <div class="star-section">
+            <button type="button"><img class="img-star" src="assets/img/stdr.png" alt=""></button>
+            <div class="text-section">Lumayan</div>
+          </div>
+          <div class="star-section">
+            <button type="button"><img class="img-star" src="assets/img/tdk-puas.png" alt=""></button>
+            <div class="text-section">Kurang Suka</div>
+          </div>
+        </div>
+        <button type="button" class="btn-rating" (click)="pageRate = !pageRate">Berikan Penilaian</button>
+      </ng-container>
+
+      <ng-container *ngIf="!pageRate">
+        <img class="img-thanks" src="assets/img/image-thanks.png" alt="">
+        <div class="sub-text text-thanks">Terimakasih telah memberikan penialainmu!</div>
+        <button type="button" class="btn-rating btn-thanks" (click)="backToHome()">Kembali Ke Beranda</button>
+      </ng-container>
+      
+    </div>
+  </div>
+</div>
