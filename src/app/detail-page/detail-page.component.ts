@@ -14,6 +14,8 @@ export class DetailPageComponent implements OnInit {
 
   public isFromHistory = false;
 
+  public invalid = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -52,13 +54,20 @@ export class DetailPageComponent implements OnInit {
   countServing(type: string) {
     if (type === 'minus') {
       this.serving--;
-      if (this.serving < 0) { this.serving = 0; }
+      if (this.serving <= 0) {
+        this.serving = 0; this.invalid = true;
+      }
     } else {
       this.serving++;
     }
   }
 
   keyup(value: any) {
+    if (value.target.value === 0) {
+      console.log(value.target.value);
+
+      this.invalid = true;
+    }
     return this.serving = value.target.value;
   }
 

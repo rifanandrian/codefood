@@ -24,7 +24,7 @@
             <div  class="btn-indicator-holder">
               <button data-cy="button-step-done" *ngIf="!item['done'] && currentIndex === idx" class="btn-indicator" (click)="stepFinish(idx)">Selesai</button>
               <img *ngIf="item['done']" class="cheklist-indicator" src="assets/img/green-checklist.png" alt="" [hidden]="idx+1 === listSteps.length">
-              <div *ngIf="item['done']" data-cy="text-step-done" class="text-indicator" [hidden]="idx+1 === listSteps.length">Selesai</div>
+              <div data-cy="text-step-done"  *ngIf="item['done']" class="text-indicator" [hidden]="idx+1 === listSteps.length">Selesai</div>
               <button data-cy="button-serve" *ngIf="fullyFinished && idx+1 === listSteps.length" class="btn-indicator--finished" (click)="finishAll()">Sajikan Makanan</button>
             </div>
             <hr [hidden]="idx+1 === listSteps.length"/>

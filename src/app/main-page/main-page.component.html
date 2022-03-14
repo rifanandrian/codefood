@@ -24,7 +24,7 @@
   </div>
 
   <div *ngIf="recipes.length > 0" class="list-items">
-    <div [attr.data-cy]="recipe.attr" class="item" *ngFor="let recipe of recipes;" (click)="moveToDetail(recipe['id'])">
+    <div [attr.data-cy]="recipe.attr" id="list-item-{{i}}"  class="item" *ngFor="let recipe of recipes; let i = index" (click)="moveToDetail(recipe['id'])" [attr.data-cy]="recipe.attr">
       <img [src]="recipe['image']" alt="" >
       <div class="item-text" >
         <div class="h-100 d-flex flex-column justify-content-between">

@@ -63,14 +63,19 @@ export class MainPageComponent implements OnInit {
         } else {
           this.checkingFilter('new');
         }
+      }
+    )
+
+    this.GlobalService.searchRecipe.subscribe(
+      search => {
+        this.getItems('', this.idRecipe !== 99 ? '?categoryId=' + this.idRecipe : '', '?q=' + search);
 
       }
-
     )
   }
 
-  getItems(sort?: string, categoryId?: string) {
-    this.httpsService.get(`recipes${!!categoryId ? categoryId : ''}${!!sort ? sort : ''}`).subscribe(
+  getItems(sort?: string, categoryId?: string, search?: string) {
+    this.httpsService.get(`recipes${!!search ? search : ''}${!!categoryId ? categoryId : ''}${!!sort ? sort : ''}`).subscribe(
       res => {
         const responseData = res.data.recipes;
         this.recipes = responseData.map((res: any, idx: any) => ({

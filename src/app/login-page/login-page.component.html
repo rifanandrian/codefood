@@ -16,7 +16,7 @@
       </div>
       <div class="div-input " [class]="isInvalid ? ' div-input--invalid' : ' div-input--last'">
         <div data-cy="form-text-password" class="form-text-password" [class]="isInvalid ? ' form-text-password--invalid' : ' '">Password</div>
-        <input data-cy="form-input-password" class="form-input-password" [class]="isInvalid ? ' form-input-password--invalid' : ' '" type="password" autocomplete="new-password" formControlName="password" required/>
+        <input data-cy="form-input-password" class="form-input-password" [class]="isInvalid ? ' form-input-password--invalid' : ' '" type="password" autocomplete="new-password" formControlName="password" (keyup)="keyup($event)"  required/>
       </div>
       <button data-cy="form-button-login" class="form-button-login btn-login" type="button" (click)="doLogin()" [disabled]="empty">Login</button>
       <div class="link">

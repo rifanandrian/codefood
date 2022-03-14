@@ -8,5 +8,7 @@ if (environment.production) {
   enableProdMode();
 }
 
+localStorage.clear();
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

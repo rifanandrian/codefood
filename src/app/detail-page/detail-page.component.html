@@ -8,7 +8,7 @@
           <img class="arrow" src="assets/img/arrow-right.png" alt="">
         </button>
       </div>
-      <img data-cy="detail-image" class="picture" [src]="recipe['image']" alt="">
+      <img data-cy="detail-image" class="picture" [src]="recipe.image" alt="">
       <div class="padding-header">
         <div data-cy="detail-text-title" class="header">{{recipe['name']}}</div>
         <div class="rating">
@@ -29,9 +29,9 @@
       <hr/>
       <div class="ingredient-holder">
         <div data-cy="detail-text-ingredients" class="ingredient">Bahan-bahan</div>
-        <div data-cy="detail-text-recipe" class="list-ingredient" *ngFor="let ingredients of recipe['ingredientsPerServing']" >
-          <div class="d-flex">
-            <span class="bolder">{{ingredients['value'] + ' ' + ingredients['unit']}}</span>&nbsp;{{ingredients['item']}}</div>
+        <div  class="list-ingredient" *ngFor="let ingredients of recipe['ingredientsPerServing']" >
+          <div class="d-flex" >
+            <span data-cy="detail-text-recipe"  class="bolder">{{ingredients['value'] + ' ' + ingredients['unit']}}</span>&nbsp;{{ingredients['item']}}</div>
         </div>
     
       </div>
@@ -50,7 +50,14 @@
       </form>
     </div>
     <div class="btn-start-holder">
-      <button data-cy="form-button-submit-portion" class="btn-start" (click)="toStepPage()">Mulai Memasak</button>
+      <button data-cy="form-button-submit-portion" [class]="invalid ? ' disabled' : ''" class="btn-start" (click)="toStepPage()" [disabled]="invalid">Mulai Memasak</button>
+    </div>
+
+    <div class="holder-alert-container">
+      <div data-cy="form-alert-container" class="form-alert-container" *ngIf="invalid">
+        <div data-cy="form-alert-text" class="text-section">Jumlah porsi minimal adalah 1</div>
+        <a data-cy="form-alert-button-ok" (click)="invalid = !invalid; serving = 1">OK</a>
+      </div>
     </div>
   </div>
 </div>

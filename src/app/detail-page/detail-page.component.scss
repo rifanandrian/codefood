@@ -19,8 +19,8 @@
       background: $white-color;
 
       overflow: overlay;
-      overflow-y: auto;
-      overflow-x: hidden;
+      // overflow-y: auto;
+      // overflow-x: hidden;
 
       .btn-holder {
         position: relative;
@@ -199,6 +199,45 @@
       color: $white-color;
       background-color: $red-color;
       border: 1px solid $red-color;
+    }
+
+    .disabled {
+      background-color: #BDBDBD;
+      border-color: #BDBDBD;
+    }
+  }
+}
+
+.holder-alert-container {
+  position: relative;
+  height: 0;
+  width: 0;
+  top: 3rem;
+
+  .form-alert-container {
+    width: 328px;
+    height: 58px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: #000000DE;
+  
+    margin-bottom: 20px;
+  
+    .text-section {
+      margin: auto;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: $white-color;
+    }
+  
+    a {
+      margin: auto;
+      color: #BB86FC;
+      text-decoration: none;
+      cursor: pointer;
     }
   }
 }

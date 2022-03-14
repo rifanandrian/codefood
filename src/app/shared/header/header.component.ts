@@ -36,18 +36,21 @@ export class HeaderComponent implements OnInit {
     })
 
     this.isHistory = this.router.url === '/history' ? true : false;
+    document.getElementById('autocomplete-box')?.classList.add('hidden');
+    document.getElementById('autocomplete-box')?.classList.add('box');
   }
 
   ngOnInit() {
     this.getRecipeCategory();
 
-    document.getElementById('autocomplete-box')?.classList.add('hidden');
   }
 
   keyup(event: any) {
     const value = event.target.value;
     if (value.length > 1) {
       document.getElementById('autocomplete-box')?.classList.remove('hidden');
+      document.getElementById('autocomplete-box')?.classList.remove('box');
+
       this.httpService.get(`search/recipes?limit&q=${value}`).subscribe(
         res => {
           this.options = res.data.map((res: any, idx: any) => ({
@@ -57,6 +60,8 @@ export class HeaderComponent implements OnInit {
         }
       )
     } else {
+      document.getElementById('autocomplete-box')?.classList.add('hidden');
+      document.getElementById('autocomplete-box')?.classList.add('box');
       this.options = [];
     }
   }
@@ -91,6 +96,8 @@ export class HeaderComponent implements OnInit {
   }
 
   clearInput() {
+    document.getElementById('autocomplete-box')?.classList.add('hidden');
+    document.getElementById('autocomplete-box')?.classList.add('box');
     this.myControl.setValue('');
     this.options = [];
   }
@@ -102,7 +109,11 @@ export class HeaderComponent implements OnInit {
 
   goSearchRecipe(id?: number) {
     // console.log(this.recipeIsSet, this.recipeIsId);
-    this.router.navigateByUrl(`${!!id ? id : this.recipeIsId}`)
+    if (!!id) {
+      this.router.navigateByUrl(`${!!id ? id : this.recipeIsId}`)
+    } else {
+      this.GlobalService.updateListRecipe(this.myControl.value);
+    }
   }
 
   moveToHistory() {

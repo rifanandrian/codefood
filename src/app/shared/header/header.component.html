@@ -19,8 +19,8 @@
                   [formControl]="myControl"
                   (keyup)="keyup($event)">
           <div class="autocomplete-panel">
-            <div data-cy="search-suggestion-container" id="autocomplete-box" class="autocomplete-box">
-              <ul [attr.data-cy]="option.attr" *ngFor="let option of options" (click)="setRecipe(option.id); goSearchRecipe(option.id)">
+            <div data-cy="search-suggestion-container" id="autocomplete-box" class="autocomplete-box" [class]="!!myControl.value ? '' : 'box hidden'">
+              <ul [attr.data-cy]="option.attr" *ngFor="let option of options; let i = index" (click)="setRecipe(option.id); goSearchRecipe(option.id)">
                 {{option.name}}
               </ul>
             </div>

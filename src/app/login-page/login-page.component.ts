@@ -110,5 +110,16 @@ export class LoginPageComponent implements OnInit {
     }, 1000)
   }
 
+  keyup(event: any) {
+    console.log(this.loginForm.controls['password'].status);
+
+    if (this.loginForm.controls['password'].status === 'INVALID') {
+      this.isInvalid = true;
+      this.errorText = 'Password Minimal 6 Karakter';
+    } else {
+      this.isInvalid = false;
+    }
+  }
+
 
 }

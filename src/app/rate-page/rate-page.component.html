@@ -3,8 +3,8 @@
 <div class="body-rate">
   <div class="rate-holder">
     <div class="rate">
-      <div *ngIf="pageRate">
-        <div data-cy="text-title" class="text-header">Yaay! Masakanmu sudah siap disajikan</div>
+      <div class="d-flex flex-column align-items-center" *ngIf="pageRate">
+        <p data-cy="text-title" class="text-header">Yaay! Masakanmu sudah siap disajikan</p>
         <img data-cy="image-rate" class="img-rate" src="assets/img/image-rate.png" alt="">
         <div data-cy="text-description" class="sub-text">Suka dengan resep dari CodeFood? Bagaimana rasanya?</div>
         <div class="star-order" >
