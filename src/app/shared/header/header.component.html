@@ -15,32 +15,25 @@
              class="mr-item"
               data-cy="header-input-search"
                   type="text"
-                  placeholder="Pick one"
-                  aria-label="Number"
-                  matInput
+                  placeholder="Cari resep"
                   [formControl]="myControl"
                   (keyup)="keyup($event)">
-          <!-- <mat-autocomplete data-cy="search-suggestion-container" #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (click)="setRecipe(option.id); goSearchRecipe(option.id)">
-              {{option.name}}
-            </mat-option>
-          </mat-autocomplete> -->
           <div class="autocomplete-panel">
-            <div data-cy="search-suggestion-container" class="autocomplete-box">
-              <ul *ngFor="let option of filteredOptions | async" (click)="setRecipe(option.id); goSearchRecipe(option.id)">
+            <div data-cy="search-suggestion-container" id="autocomplete-box" class="autocomplete-box">
+              <ul [attr.data-cy]="option.attr" *ngFor="let option of options" (click)="setRecipe(option.id); goSearchRecipe(option.id)">
                 {{option.name}}
               </ul>
             </div>
           </div>
-        <div data-cy="header-button-clear" class="close-icon-holder">
-          <div class="close-icon"><img src="assets/img/close-icon.png" alt=""></div>
+        <div class="close-icon-holder">
+          <div data-cy="header-button-clear" class="close-icon"><img *ngIf="!!myControl.value" src="assets/img/close-icon.png" alt="" (click)="clearInput()"></div>
         </div>
         <div class="">
           <button data-cy="header-button-search" (click)="goSearchRecipe()">Cari</button>
         </div>
       </div>
-      <button data-cy="header-button-history" *ngIf="!isHistory" class="btn-history" >
-        <img [hidden]="hideNavbar" class="history" src="assets/img/header-button-history.png" alt="" srcset="" (click)="moveToHistory()">
+      <button data-cy="header-button-history" class="btn-history" >
+        <img *ngIf="!isHistory" [hidden]="hideNavbar" class="history" src="assets/img/header-button-history.png" alt="" srcset="" (click)="moveToHistory()">
       </button>
     </div>
   

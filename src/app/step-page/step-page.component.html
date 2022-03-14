@@ -5,10 +5,10 @@
     <div class="step">
 
       <div class="btn-holder">
-        <button class="back-button" (click)="backToIngridient()">
+        <button data-cy="button-back" class="back-button" (click)="backToIngridient()">
           <img class="arrow" src="assets/img/arrow-right.png" alt="">
         </button>
-        <div class="header-text">Langkah Memasak</div>
+        <div data-cy="text-title" class="header-text">Langkah Memasak</div>
       </div>
 
       <div class="step-guide-holder" *ngFor="let item of listSteps; let idx = index">
@@ -19,17 +19,13 @@
             <div [hidden]="idx+1 === listSteps.length" class="vl " [class]="!item['done'] ? 'vl--disable' : ''"></div>
           </div>
           <div [attr.data-cy]="item.attr" class="guide-content w-100">
-            <div class="subheader-text " [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">Step {{item['stepOrder']}}</div>
-            <div class="desc" [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">{{item['description']}}</div>
-            <div *ngIf="!item['done'] && currentIndex === idx" class="btn-indicator-holder">
-              <button data-cy="button-step-done" class="btn-indicator" (click)="stepFinish(idx)">Selesai</button>
-            </div>
-            <div *ngIf="item['done']" class="btn-indicator-holder" [hidden]="idx+1 === listSteps.length">
-              <img class="cheklist-indicator" src="assets/img/green-checklist.png" alt="">
-              <div class="text-indicator">Selesai</div>
-            </div>
-            <div *ngIf="fullyFinished && idx+1 === listSteps.length" class="btn-indicator-holder">
-              <button class="btn-indicator--finished" (click)="finishAll()">Sajikan Makanan</button>
+            <div data-cy="text-step-title" class="subheader-text " [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">Step {{item['stepOrder']}}</div>
+            <div data-cy="text-step-description" class="desc" [class]="item['done'] || currentIndex === idx ? 'color-black' : 'color-gray' ">{{item['description']}}</div>
+            <div  class="btn-indicator-holder">
+              <button data-cy="button-step-done" *ngIf="!item['done'] && currentIndex === idx" class="btn-indicator" (click)="stepFinish(idx)">Selesai</button>
+              <img *ngIf="item['done']" class="cheklist-indicator" src="assets/img/green-checklist.png" alt="" [hidden]="idx+1 === listSteps.length">
+              <div *ngIf="item['done']" data-cy="text-step-done" class="text-indicator" [hidden]="idx+1 === listSteps.length">Selesai</div>
+              <button data-cy="button-serve" *ngIf="fullyFinished && idx+1 === listSteps.length" class="btn-indicator--finished" (click)="finishAll()">Sajikan Makanan</button>
             </div>
             <hr [hidden]="idx+1 === listSteps.length"/>
           </div>

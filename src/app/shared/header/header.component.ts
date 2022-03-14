@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, startWith } from 'rxjs';
 import { GlobalService } from 'src/app/services/Global.service';
 import { HttpService } from 'src/app/services/http.service';
 
 export interface Options {
   id: number;
   name: string;
+  attr: string;
 }
 
 @Component({
@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
 
   public myControl = new FormControl();
   public options: Options[] = [];
-  public filteredOptions: Observable<Options[]> | undefined;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -35,7 +34,6 @@ export class HeaderComponent implements OnInit {
     this.route.params.subscribe(res => {
       this.hideNavbar = !!res['id'] ? true : false;
     })
-    console.log(this.router.url);
 
     this.isHistory = this.router.url === '/history' ? true : false;
   }
@@ -43,25 +41,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.getRecipeCategory();
 
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => (typeof value === 'string' ? value : value.name)),
-      map(name => (name ? this._filter(name) : this.options.slice())),
-    );
-  }
-
-  private _filter(value: string): Options[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    document.getElementById('autocomplete-box')?.classList.add('hidden');
   }
 
   keyup(event: any) {
     const value = event.target.value;
-    if (value.length >= 2) {
+    if (value.length > 1) {
+      document.getElementById('autocomplete-box')?.classList.remove('hidden');
       this.httpService.get(`search/recipes?limit&q=${value}`).subscribe(
         res => {
-          this.options = res.data;
+          this.options = res.data.map((res: any, idx: any) => ({
+            ...res,
+            attr: `search-suggestion-${idx}`
+          }));
         }
       )
     } else {
@@ -96,6 +88,11 @@ export class HeaderComponent implements OnInit {
       }
 
     }
+  }
+
+  clearInput() {
+    this.myControl.setValue('');
+    this.options = [];
   }
 
   setRecipe(val: number) {
